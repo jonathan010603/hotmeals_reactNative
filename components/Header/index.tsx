@@ -8,19 +8,27 @@ const Header = () => {
                 style={styles.logo}
                 resizeMode="contain"
             />
+            <Image
+                source={require('../../assets/burger.png')}
+                style={styles.burger}
+                resizeMode="contain"
+            />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     header: {
-        height: 130,
+        height: 90,
         backgroundColor: '#f14049',
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+        paddingTop: 40,
+        paddingLeft: 10
     },
-    logo: { width: 250, marginTop: 'auto' }
+    logo: { width: 150 },
+    burger: { width: 70, height: 40 }
 })
 
 export default Header;
