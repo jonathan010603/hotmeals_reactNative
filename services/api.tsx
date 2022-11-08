@@ -8,5 +8,9 @@ export const FetchWord = async (query: String): Promise<any> => {
 }
 
 export const RandomMeal = async () => {
+    //www.themealdb.com/api/json/v1/1/categories.php
+}
+
+export const ListCategories = async () => {
     
 }

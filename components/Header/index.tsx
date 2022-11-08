@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 const Header = () => {
     return (
@@ -8,11 +8,14 @@ const Header = () => {
                 style={styles.logo}
                 resizeMode="contain"
             />
-            <Image
-                source={require('../../assets/burger.png')}
-                style={styles.burger}
-                resizeMode="contain"
-            />
+            
+            <TouchableOpacity>
+                <Image
+                    source={require('../../assets/burger.png')}
+                    style={styles.burger}
+                    resizeMode="contain"
+                />
+            </TouchableOpacity>
         </View>
     );
 }
