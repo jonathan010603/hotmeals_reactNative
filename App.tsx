@@ -1,18 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Header, Wrapper, Search, Footer } from './components';
-import Hero from './screens/HomeScreen/Hero';
+import React, { useRef, useEffect, useState } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Header, Navigation } from './components';
 import { ContextWrapper } from './context/globalCtx';
-import { HomeScreen } from './screens';
+import { HomeScreen, SearchScreen } from './screens';
 
-export default function App() {
+const App = () => {
+  const screenList = [<HomeScreen />, <SearchScreen />]
+  const [screen, setScreen] = useState<number>(0);
+  const scrollRef = useRef<ScrollView>(null);
+  const scrollTop = () => scrollRef.current
+    ?.scrollTo({ y: 0, animated: true })
 
   return (
     <ContextWrapper>
-      <Header />
-      <HomeScreen />
-      <Footer />
-    </ContextWrapper>
+      <Header toTheTop={scrollTop} />
+      <ScrollView ref={scrollRef}>
+        {screenList[screen]}
+      </ScrollView>
+      <Navigation screen={screen} setScreen={setScreen} />
+    </ContextWrapper >
   );
 }
+
+export default App;

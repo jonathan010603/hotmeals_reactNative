@@ -1,44 +1,39 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { LinearGradient } from "expo-linear-gradient";
+import styled from 'styled-components/native';
 
 const Hero = () => {
     return (
-        <View style={styles.container}>
-            <Image
+        <Container>
+            <Banner
                 source={require('../../../assets/hero.jpg')}
-                style={styles.image}
                 resizeMode="cover"
             />
-            <Text style={styles.txt}>{`Your\nFavourite\nMeals in\nOne place`}</Text>
-        </View>
+            <Phrase>{`Your\nFavourite\nMeals in\nOne place`}</Phrase>
+        </Container>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-    },
-    gradient: {
-        position: 'absolute',
-        width: 410,
-        height: 400,
-        zIndex: 2,
-        justifyContent: 'flex-end'
-    },
-    txt: {
-        position: 'absolute',
-        top: 100,
-        alignSelf: 'flex-start',
-        textShadowColor: '#000000',
-        textShadowOffset: { width: -0.5, height: 1 },
-        textShadowRadius: 5,
-        color: '#FFFFFF',
-        fontSize: 60,
-        marginLeft: 12
-    },
-    image: {
-        width: '100%',
-        height: 500
-    }
-});
+const Container = styled.View`
+    background-color: #000000;
+`
+
+const Banner = styled.Image`
+    width: 100%;
+    height: 400px;
+    blur-radius: 200px;
+    opacity: 0.6
+`
+
+const Phrase = styled.Text`
+    top: 70px;
+    color: #FFFFFF;
+    font-size: 44px;
+    line-height: 60px;
+    margin-left: 12px;
+    position: absolute;
+    align-self: flex-start;
+    text-shadow-radius: 5px;
+    text-shadow-color: #000000;
+    text-shadow-offset: { width: -0.5px, height: 1px };
+`
 
 export default Hero;

@@ -1,37 +1,47 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import styled from 'styled-components/native';
 
-const Header = () => {
+interface Iprops {
+    toTheTop: () => void
+}
+
+const Header = ({ toTheTop }: Iprops) => {
     return (
-        <View style={styles.header} >
-            <Image
-                source={require('../../assets/logo.png')}
-                style={styles.logo}
-                resizeMode="contain"
-            />
-            
-            <TouchableOpacity>
-                <Image
-                    source={require('../../assets/burger.png')}
-                    style={styles.burger}
+        <Container>
+            <TouchableOpacity onPress={() => toTheTop()}>
+                <Logo
+                    source={require('../../assets/logo.png')}
                     resizeMode="contain"
                 />
             </TouchableOpacity>
-        </View>
+
+            <TouchableOpacity>
+                <Burger
+                    source={require('../../assets/burger.png')}
+                    resizeMode="contain"
+                />
+            </TouchableOpacity>
+        </Container>
     );
 }
 
-const styles = StyleSheet.create({
-    header: {
-        height: 90,
-        backgroundColor: '#f14049',
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: 40,
-        paddingLeft: 10
-    },
-    logo: { width: 150 },
-    burger: { width: 70, height: 40 }
-})
+const Container = styled.View`
+    height: 90px;
+    padding-top: 40px;
+    padding-left: 10px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #f14049;
+`
+
+const Logo = styled.Image`
+    width: 150px
+`
+
+const Burger = styled.Image`
+    width: 70px;
+    height: 40px
+`
 
 export default Header;

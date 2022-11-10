@@ -1,46 +1,51 @@
-import { useContext } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
-import { GlobalContext } from '../../context/globalCtx';
+import { useState } from "react";
+import CategoryCard from './CategoryCard';
+import styled from 'styled-components/native';
 import Card from './Card';
+import React from "react";
 
-const Wrapper = () => {
-    const ctx = useContext(GlobalContext);
-    // Acrescentar um map ao resultado, que irá exibir as imagens na tela.
-
-    const renderCard = (meal: any) => {
-        return (
-            < Card
-                key={meal.idMeal}
-                title={meal.strMeal}
-                imgSrc={meal.strMealThumb}
-            />
-        );
-    }
-
-    return (
-        <ScrollView style={styles.container} horizontal={true}>
-            {
-                ctx.meals?.map(
-                    (meal: any) =>
-                        renderCard(meal)
-                )
-            }
-        </ScrollView>
-    );
+interface Iprops {
+    cat?: boolean,
+    items: Array<Object>
 }
 
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 30,
-        paddingLeft: 30,
-        paddingRight: 30
-    },
-    image: {
-        marginRight: 15,
-        width: 350,
-        height: 500,
-        borderRadius: 30,
+const Wrapper = React.memo(
+    ({ items, cat }: Iprops) => {
+
+        return (
+            <>
+                <Container>
+                    {
+                        items?.map((item: any) => {
+                            if (cat) return (
+                                <CategoryCard
+                                    id={item.idCategory}
+                                    name={item.strCategory}
+                                    thumb={item.strCategoryThumb}
+                                />
+                            )
+                            return (
+                                <Card
+                                    id={item.idMeal}
+                                    name={item.strMeal}
+                                    thumb={item.strMealThumb}
+                                />
+                            );
+                        })
+                    }
+                </Container>
+            </>
+        );
     }
-});
+)
+
+const Container = styled.View`
+    padding-horizontal: 10px;
+    width: 97%;
+    align-self: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+`
 
 export default Wrapper;
