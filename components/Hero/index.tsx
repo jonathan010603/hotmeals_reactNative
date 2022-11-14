@@ -4,7 +4,7 @@ const Hero = () => {
     return (
         <Container>
             <Banner
-                source={require('../../../assets/hero.jpg')}
+                source={require('../../assets/hero.jpg')}
                 resizeMode="cover"
             />
             <Phrase>{`Your\nFavourite\nMeals in\nOne place`}</Phrase>

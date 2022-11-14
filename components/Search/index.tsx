@@ -1,6 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
-import { StyleSheet, TextInput, View, TouchableOpacity, Image } from 'react-native';
-import { GlobalContext } from '../../../context/globalCtx';
+import { useState } from 'react';
 import styled from 'styled-components/native';
 
 interface Iprops {
@@ -10,12 +8,19 @@ interface Iprops {
 const Search = ({ setQuery }: Iprops) => {
     const [searchInput, setInput] = useState(String);
 
+    const clicked = () => {
+        !searchInput.match(/^\s*$/) && setQuery(searchInput);
+    }
+
     return (
         <Container>
-            <Input onChangeText={text => setInput(text)} onSubmitEditing={() => setQuery(searchInput)} />
-            <Button onPress={() => setQuery(searchInput)}>
+            <Input
+                onChangeText={text => setInput(text)}
+                onSubmitEditing={() => setQuery(searchInput)}
+            />
+            <Button onPress={() => clicked()}>
                 <Icon
-                    source={require('../../../assets/search.png')}
+                    source={require('../../assets/search.png')}
                     resizeMode="contain"
                 />
             </Button>
@@ -24,9 +29,10 @@ const Search = ({ setQuery }: Iprops) => {
 }
 
 const Container = styled.View`
-    width: 350px;
+    width: 385px;
     height: 60px;
     margin-top: 50px;
+    margin-bottom: 10px;
     border-radius: 30px;
     background-color: #f7f7f7;
     align-self: center;

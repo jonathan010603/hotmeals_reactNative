@@ -7,7 +7,7 @@ export const categoryData = [
     {
         idCategory: "13",
         strCategory: "Breakfast",
-        strCategoryThumb: "https:\/\/www.themealdb.com\/images\/category\/breakfast.png"
+        strCategoryThumb: "https://pixabay.com/get/ga562ce8dfa9f56788307795cdb76ea67a79e77c76397bde8c5820f74d05b9231ea4b314352ee5cebbe2e6e9cf0e9d8ee2b30ecbe5432960baafb322dc67ccb652426a2614d71db735175713508e4eefd_1920.png"
     },
     {
         idCategory: "2",
@@ -22,7 +22,7 @@ export const categoryData = [
     {
         idCategory: "14",
         strCategory: "Goat",
-        strCategoryThumb: "https:\/\/www.themealdb.com\/images\/category\/goat.png"
+        strCategoryThumb: "https:\/\/www.pngkey.com\/png\/detail\/89-898908_curry-goat-dinner-jakarta.png"
     },
     {
         idCategory: "4",

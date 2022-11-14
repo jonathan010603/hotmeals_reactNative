@@ -1,24 +1,51 @@
-import Hero from "./Hero";
-import { useEffect, useState } from "react";
-import { Wrapper } from "../../components";
-import styled from "styled-components/native";
-import React from "react";
+import { CategoryCard, Hero } from "../../components";
 import { categoryData } from "../../assets/categories";
+import { FlatList, ListRenderItem } from "react-native";
+import React, { useContext, useEffect } from "react";
+import styled from "styled-components/native";
+import { GlobalContext } from "../../context/globalCtx";
+
+type Icategory = {
+    idCategory: String,
+    strCategory: String,
+    strCategoryThumb: String
+}
 
 const HomeScreen = () => {
+    const globalCtx = useContext(GlobalContext);
+
+    useEffect(() => {
+        globalCtx.setCategories(categoryData);
+    }, [])
+
+    const renderItem: ListRenderItem<Icategory> = ({ item }) => (
+        <CategoryCard
+            id={item.idCategory}
+            name={item.strCategory}
+            thumb={item.strCategoryThumb}
+        />
+    );
 
     return (
-        <>
-            <Hero />
-            <ShowCaseHeader>
-                <ShowCaseName>Categories</ShowCaseName>
-                <Icon
-                    source={require('../../assets/expand.png')}
-                    resizeMode="contain"
-                />
-            </ShowCaseHeader>
-            <Wrapper items={categoryData} cat={true} />
-        </>
+        <FlatList
+            ListHeaderComponent={
+                <>
+                    <Hero />
+                    <ShowCaseHeader>
+                        <ShowCaseName>Categories</ShowCaseName>
+                        <Icon
+                            source={require('../../assets/expand.png')}
+                            resizeMode="contain"
+                        />
+                    </ShowCaseHeader>
+                </>
+            }
+            numColumns={2}
+            horizontal={false}
+            data={categoryData}
+            keyExtractor={(item) => item.idCategory}
+            renderItem={renderItem}
+        />
     )
 }
 

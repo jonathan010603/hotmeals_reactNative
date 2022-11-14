@@ -1,13 +1,19 @@
 import styled from "styled-components/native";
 
-const CategoryCard = ({ id, name, thumb }: any) => {
+const FetchCard = ({ id, name, thumb }: any) => {
     return (
-        <Container>
+        <Container style={{ flex: 1 / 2 }}>
             <ThumbImage
                 source={{ uri: thumb }}
                 resizeMode="center"
             />
-            <Title>{name}</Title>
+            <Title>
+                {
+                    name.length > 15
+                        ? (name.substring(0, 15) + '...')
+                        : name
+                }
+            </Title>
         </Container>
     );
 }
@@ -27,4 +33,4 @@ const Title = styled.Text`
     font-size: 20px;
 `
 
-export default CategoryCard;
+export default FetchCard;
