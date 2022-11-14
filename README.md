@@ -18,3 +18,8 @@ Commit 2 - november 07
 Commit 3 - november 08
 
 ![WhatsApp Image 2022-11-09 at 00 09 26](https://user-images.githubusercontent.com/76676185/200728800-b59d0e1b-019d-43e7-884d-2f45566f9cd6.jpeg)
+
+
+Commit 4 - november 9
+
+![Screenshot_20221110-021431_Expo_Go](https://user-images.githubusercontent.com/76676185/201007562-10f42c65-a389-44f2-9d1a-b1fc2ad7c8eb.jpg)
