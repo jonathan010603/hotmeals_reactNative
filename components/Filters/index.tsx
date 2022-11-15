@@ -1,17 +1,23 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components/native";
 
 type Iprops = {
-    amount: number
+    amount: number,
+    setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const Filters = ({ amount }: Iprops) => {
+const Filters = ({ amount, setModalOpen }: Iprops) => {
+
+    const clicked = () => {
+        setModalOpen(true)
+    }
 
     return (
         <>
             <Bar />
             <Container>
                 <FilterText>{amount} results</FilterText>
-                <Button>
+                <Button onPress={() => clicked()}>
                     <FilterText>Filters</FilterText>
                     <PlusIcon
                         source={require('../../assets/plus.png')}

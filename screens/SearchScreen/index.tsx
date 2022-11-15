@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { FlatList, ListRenderItem, Text, View } from "react-native";
-import { Filters, Search } from "../../components";
+import { useContext, useEffect, useState } from "react";
+import { FlatList, ListRenderItem, Modal, Text, View } from "react-native";
+import { FilterModal, Filters, Search } from "../../components";
 import FetchCard from "../../components/FetchCard";
+import { SearchContext } from "../../context/searchCtx";
 import useFilterItems from "../../hooks/useFilterItems";
 
 export type Imeals = {
@@ -13,9 +14,10 @@ export type Imeals = {
 
 const SearchScreen = () => {
     const [query, setQuery] = useState<string | null>(null);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [rawItems, setRawItems] = useState<Array<Imeals>>([]);
     const [filteredItems, setfilteredItems] = useState<Array<Imeals>>([]);
-    const [filters, setFilters] = useState<Array<String>>([]);
+    const SearchCtx = useContext(SearchContext);
 
     useEffect(() => {
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
@@ -24,9 +26,9 @@ const SearchScreen = () => {
     }, [query]);
 
     useEffect(() => {
-        let filtered = useFilterItems(rawItems, filters);
+        let filtered = useFilterItems(rawItems, SearchCtx?.filters);
         setfilteredItems(filtered)
-    }, [rawItems, filters]);
+    }, [rawItems]);
 
     const renderItem: ListRenderItem<Imeals> = ({ item }) => (
         <FetchCard
@@ -45,8 +47,14 @@ const SearchScreen = () => {
                     <Search setQuery={setQuery} />
                     {
                         filteredItems?.length > 0 &&
-                        <Filters amount={filteredItems?.length} />
+                        <Filters
+                            amount={filteredItems?.length}
+                            setModalOpen={setModalOpen}
+                        />
                     }
+                    <Modal transparent={true} visible={modalOpen}>
+                        <FilterModal setModalOpen={setModalOpen} />
+                    </Modal>
                 </>
             }
             numColumns={2}

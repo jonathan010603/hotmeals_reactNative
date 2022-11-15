@@ -5,7 +5,7 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components/native";
 import { GlobalContext } from "../../context/globalCtx";
 
-type Icategory = {
+export type Icategory = {
     idCategory: String,
     strCategory: String,
     strCategoryThumb: String

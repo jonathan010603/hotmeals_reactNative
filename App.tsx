@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Header, Navigation } from './components';
 import { GlobalCtxWrapper } from './context/globalCtx';
+import { SearchCtxWrapper } from './context/searchCtx';
 import { HomeScreen, SearchScreen } from './screens';
 
 const App = () => {
@@ -13,9 +14,11 @@ const App = () => {
 
   return (
     <GlobalCtxWrapper>
-      <Header toTheTop={scrollTop} />
+      <SearchCtxWrapper>
+        <Header toTheTop={scrollTop} />
         {screenList[screen]}
-      <Navigation screen={screen} setScreen={setScreen} />
+        <Navigation screen={screen} setScreen={setScreen} />
+      </SearchCtxWrapper>
     </GlobalCtxWrapper >
   );
 }
