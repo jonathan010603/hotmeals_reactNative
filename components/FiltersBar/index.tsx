@@ -6,11 +6,13 @@ type Iprops = {
     setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const Filters = ({ amount, setModalOpen }: Iprops) => {
+const FiltersBar = ({ amount, setModalOpen }: Iprops) => {
 
     const clicked = () => {
         setModalOpen(true)
     }
+
+    if (!(amount > 0)) return <></>;
 
     return (
         <>
@@ -63,4 +65,4 @@ const Bar = styled.View`
     background-color: #EBEBEB;
 `
 
-export default Filters;
+export default FiltersBar;

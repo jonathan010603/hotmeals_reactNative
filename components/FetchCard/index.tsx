@@ -21,7 +21,7 @@ const FetchCard = ({ id, name, thumb }: any) => {
 const Container = styled.TouchableOpacity`
     align-items: center;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin: auto;
 `
 
 const ThumbImage = styled.Image`

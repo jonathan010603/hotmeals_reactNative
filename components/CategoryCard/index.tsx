@@ -15,7 +15,7 @@ const CategoryCard = ({ id, name, thumb }: any) => {
 const Container = styled.TouchableOpacity`
     align-items: center;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin: auto;
 `
 
 const ThumbImage = styled.Image`
@@ -24,7 +24,7 @@ const ThumbImage = styled.Image`
 `
 
 const Title = styled.Text`
-    font-size: 20px;
+    font-size: 19px;
 `
 
 export default CategoryCard;

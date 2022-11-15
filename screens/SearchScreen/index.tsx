@@ -1,6 +1,7 @@
+import { FlashList } from "@shopify/flash-list";
 import { useContext, useEffect, useState } from "react";
-import { FlatList, ListRenderItem, Modal, Text, View } from "react-native";
-import { FilterModal, Filters, Search } from "../../components";
+import { Modal } from "react-native";
+import { FilterModal, FiltersBar, Search } from "../../components";
 import FetchCard from "../../components/FetchCard";
 import { SearchContext } from "../../context/searchCtx";
 import useFilterItems from "../../hooks/useFilterItems";
@@ -30,24 +31,13 @@ const SearchScreen = () => {
         setfilteredItems(filtered)
     }, [rawItems]);
 
-    const renderItem: ListRenderItem<Imeals> = ({ item }) => (
-        <FetchCard
-            key={item.idMeal}
-            id={item.idMeal}
-            name={item.strMeal}
-            thumb={item.strMealThumb}
-        />
-    );
-
     return (
-        <FlatList
-            contentContainerStyle={{ marginHorizontal: 5 }}
+        <FlashList
             ListHeaderComponent={
                 <>
                     <Search setQuery={setQuery} />
                     {
-                        filteredItems?.length > 0 &&
-                        <Filters
+                        <FiltersBar
                             amount={filteredItems?.length}
                             setModalOpen={setModalOpen}
                         />
@@ -58,10 +48,16 @@ const SearchScreen = () => {
                 </>
             }
             numColumns={2}
-            horizontal={false}
-            data={filteredItems}
-            keyExtractor={(item) => item.idMeal}
-            renderItem={renderItem}
+            data={filteredItems || []}
+            estimatedItemSize={25}
+            renderItem={({ item }) => (
+                <FetchCard
+                    key={item.idMeal}
+                    id={item.idMeal}
+                    name={item.strMeal}
+                    thumb={item.strMealThumb}
+                />
+            )}
         />
     )
 }

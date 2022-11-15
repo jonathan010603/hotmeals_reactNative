@@ -1,5 +1,6 @@
+import { FlashList } from "@shopify/flash-list";
 import { Dispatch, SetStateAction, useContext } from "react";
-import { FlatList, ListRenderItem, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { categoryData } from "../../assets/categories";
 import { SearchContext } from "../../context/searchCtx";
@@ -22,12 +23,6 @@ const FilterModal = ({ setModalOpen }: Iprops) => {
         setModalOpen(false);
     }
 
-    const renderItem: ListRenderItem<Icategory> = ({ item }) => (
-        <CategoryBox onPress={() => { }}>
-            <CategoryBoxTxt>{item.strCategory}</CategoryBoxTxt>
-        </CategoryBox>
-    );
-
     return (
         <Container>
             <Content>
@@ -36,13 +31,17 @@ const FilterModal = ({ setModalOpen }: Iprops) => {
                         source={require('../../assets/close.png')}
                     />
                 </TouchableOpacity>
-                <FlatList
-                    columnWrapperStyle={{ flexWrap: 'wrap' }}
+                <FlashList
                     numColumns={3}
                     horizontal={false}
                     keyExtractor={(item) => item.idCategory}
                     data={categoryData}
-                    renderItem={renderItem}
+                    estimatedItemSize={14}
+                    renderItem={({ item }) => (
+                        <CategoryBox onPress={() => { }}>
+                            <CategoryBoxTxt>{item.strCategory}</CategoryBoxTxt>
+                        </CategoryBox>
+                    )}
                 />
                 <Apply onPress={() => clickedApply()}>
                     <ApplyTxt>Apply</ApplyTxt>
@@ -77,7 +76,7 @@ const Apply = styled.TouchableOpacity`
     height: 40px;
     border-radius: 20px;
     margin-top: auto;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     align-self: center;
     align-items: center;
     justify-content: center;

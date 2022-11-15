@@ -1,9 +1,9 @@
 import { CategoryCard, Hero } from "../../components";
 import { categoryData } from "../../assets/categories";
-import { FlatList, ListRenderItem } from "react-native";
+import { GlobalContext } from "../../context/globalCtx";
+import { FlashList } from "@shopify/flash-list";
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components/native";
-import { GlobalContext } from "../../context/globalCtx";
 
 export type Icategory = {
     idCategory: String,
@@ -18,16 +18,8 @@ const HomeScreen = () => {
         globalCtx.setCategories(categoryData);
     }, [])
 
-    const renderItem: ListRenderItem<Icategory> = ({ item }) => (
-        <CategoryCard
-            id={item.idCategory}
-            name={item.strCategory}
-            thumb={item.strCategoryThumb}
-        />
-    );
-
     return (
-        <FlatList
+        <FlashList
             ListHeaderComponent={
                 <>
                     <Hero />
@@ -41,10 +33,15 @@ const HomeScreen = () => {
                 </>
             }
             numColumns={2}
-            horizontal={false}
             data={categoryData}
-            keyExtractor={(item) => item.idCategory}
-            renderItem={renderItem}
+            estimatedItemSize={14}
+            renderItem={({ item }) => (
+                <CategoryCard
+                    id={item.idCategory}
+                    name={item.strCategory}
+                    thumb={item.strCategoryThumb}
+                />
+            )}
         />
     )
 }

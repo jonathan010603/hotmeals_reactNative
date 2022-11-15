@@ -4,5 +4,5 @@ export { default as CategoryCard } from "./CategoryCard";
 export { default as FetchCard } from "./FetchCard";
 export { default as Search } from "./Search";
 export { default as Hero } from "./Hero";
-export { default as Filters } from "./Filters";
+export { default as FiltersBar } from "./FiltersBar";
 export { default as FilterModal } from "./FilterModal";
